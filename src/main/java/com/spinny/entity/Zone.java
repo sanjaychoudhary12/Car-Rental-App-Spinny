@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class Zone {
 
         @Id
-        @Column(name = "id", nullable = false)
+       //@Column(name = "id", nullable = false)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
         @Column(name = "area", nullable = false, length = 45)

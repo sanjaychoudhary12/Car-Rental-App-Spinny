@@ -29,8 +29,15 @@ public class CustomerCareControlller {
     public String allocateAgent(
             @RequestParam long scheduleVisitId
     ){
-        ScheduleVisit scheduleVisit = scheduleVisitRepository.findById((int) scheduleVisitId).get();
+        //ScheduleVisit scheduleVisit = scheduleVisitRepository.findById((int) scheduleVisitId).get();
+        ScheduleVisit scheduleVisit = scheduleVisitRepository.findById((int) scheduleVisitId)
+                .orElseThrow(() -> new RuntimeException("ScheduleVisit not found with id: " + scheduleVisitId));
+
        Zone zone = findZone(scheduleVisit.getLocation());
+        if (zone == null) {
+            throw new RuntimeException("No zone found for area: " + scheduleVisit.getLocation());
+        }
+
       Agent agent = zone.getAgent();
         scheduleVisit.setAgent(agent);
         scheduleVisitRepository.save(scheduleVisit);

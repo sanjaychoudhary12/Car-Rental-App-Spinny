@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 public class ScheduleVisit {
 
     @Id
-    @Column(name = "id", nullable = false)
+   //@Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "car_company_name", nullable = false, length = 45)
